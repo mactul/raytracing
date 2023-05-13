@@ -1,5 +1,7 @@
 #include "raytracing.h"
 
+#define RAN_F (float)(RAND_MAX/2 - rand())/(float)RAND_MAX
+
 void ray_AB(Ray* prdest, Vector* A, Vector* B)
 {
     prdest->start_position = *A;
@@ -24,7 +26,7 @@ float intersection(Vector* intersection_point, Ray* pr, Sphere* ps)
     vector_sub(&vCA, &(pr->start_position), ps->center);
 
     b = 2*vector_dot_product(&vCA, &(pr->direction));
-    vector_norme(&vCA); // compute the norme
+    vector_norme(&vCA); // compute and cache the norme
     c = vCA.square_norme - ps->radius * ps->radius;
 
     delta = b*b -4*c;
@@ -39,13 +41,9 @@ float intersection(Vector* intersection_point, Ray* pr, Sphere* ps)
     t1 = (-b - delta) / 2;
     t2 = (-b + delta) / 2;
 
-    if(t1 <= 0 && t2 <= 0)
+    if(t1 <= 0 || t2 <= 0)
     {
         return -1.0;
-    }
-    if(t1 <= 0 || t2 <= t1)
-    {
-        t = t2;
     }
     else
     {

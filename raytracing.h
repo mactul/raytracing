@@ -4,7 +4,7 @@
 #define MAX_NUMBER_LIGHTS 10
 
 #define DELTA 100
-#define N 800
+#define N 1000
 
 
 typedef struct sphere {
@@ -12,6 +12,7 @@ typedef struct sphere {
     float radius;
     FloatColor* color;
     float reflexion_rate;
+    float roughness;
 } Sphere;
 
 typedef struct light {

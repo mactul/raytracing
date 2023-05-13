@@ -1,6 +1,6 @@
 #include "vector.h"
 
-#define EPSILON 1e-5
+#define EPSILON 1e-13
 
 void vector_init(Vector* pv, float x, float y, float z)
 {
